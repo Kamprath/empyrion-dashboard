@@ -86,12 +86,9 @@
     }
 
     function bindSaveEvent() {
-        $('.todo .input-group input[type=text]')
-            .unbind('keyup')
-            .on('keyup', function(e) {
-                e.preventDefault();
-                saveTodo();
-            });
+        $('.todo .input-group input')
+            .unbind('change')
+            .on('change', saveTodo);
     }
 
     // reset checkboxes and list styles when 'reset' is clicked
@@ -108,10 +105,11 @@
     $('#create-todo').on('click', function(e) {
         e.preventDefault();
         
-        var template = $('#todo-template').html();
+        var $item =$($('#todo-template').html());
 
-        $(this).before(template);
-
+        $(this).before($item);
+        $item.find('input[type=text]').focus();
+        
         bindSaveEvent();
     });
 
@@ -125,6 +123,8 @@
                 $(this).remove();
             }
         });
+
+        saveTodo();
     });
 
     $(document).ready(function() {
