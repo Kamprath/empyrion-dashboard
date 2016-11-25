@@ -1,4 +1,27 @@
 body {
     background-color: black;
     color: #fff;
+    background-image: url('../images/bg.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+body.dragging, .input-group-addon, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+.todo li {
+    list-style-type: none;
+}
+.todo ul {
+    padding: 0;
+}
+.todo-list .input-group {
+    margin: 3px 0;
 }

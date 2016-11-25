@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Empyrion Dashboard</title>
+
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/app.css">
+    
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="starter-template">
+        <h2>Todo</h2>
+        <div class="todo">
+            <ul class="todo-list">
+                <!-- Todo items rendered here -->
+            </ul>
+
+            <a href="#" id="create-todo">Add...</a> | <a href="#" id="clear-todo">Clear Completed</a>
+        </div>
+
+        <div class="checklists">
+            <h2>Checklists</h2>
+            <!-- Checklists rendered here -->
+        </div>
+
+        </div>
+    </div><!-- /.container -->
+
+    <!-- Contains data for the checklists -->
+    <script id="checklist-json" type="application/json">
+        {
+            "Interplanetary Travel": [{
+                "title": "Gather supplies",
+                "description": "Stock up on fuel, ammo, food, and oxygen."
+            }, {
+                "title": "Stock ship",
+                "description": "Fill ship O2, fuel, and food supplies."
+            }],
+
+            "Mining Run Prep": [{
+                "title": "Gather supplies",
+                "description": "Stock up on fuel, ammo, food, and oxygen."
+            }]
+        }
+    </script>
+
+    <script id="todo-template" type="text/template">
+        <li class="input-group">
+            <span class="input-group-addon">
+                <input type="checkbox" aria-label="">
+            </span>
+            <input type="text" class="form-control" aria-label="">
+        </li>
+    </script>
+
+    <script id="checklist-template" type="text/template">
+        <div class="list-group">
+            <h3>{title} <small><a href="#" class="reset">Reset</a></small></h3>
+        </div>
+    </script>
+
+    <script id="checklist-item-template" type="text/template">
+        <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">
+                <input type="checkbox">&nbsp;&nbsp;{number}. {title}
+            </h4>
+            <p class="list-group-item-text">{description}</p>
+        </a>
+    </script>
+
+    <script src="resources/js/vendor.min.js"></script>
+    <script src="resources/js/app.js"></script>
+  </body>
+</html>

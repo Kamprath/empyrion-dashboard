@@ -1,0 +1,9 @@
+{
+    "Interplanetary Travel": [{
+        "title": "Gather supplies",
+        "description": "Stock up on fuel, ammo, food, and oxygen."
+    }, {
+        "title": "Stock ship",
+        "description": "Fill ship O2, fuel, and food supplies."
+    }]
+}
