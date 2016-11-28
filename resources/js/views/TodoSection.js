@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Construct the view
  */
@@ -10,11 +12,11 @@ function View() {
  * Render the view
  */
 View.prototype.render = function() {
-    // render section to .content div
     var sectionTemplate = $('#todo-section-template').html();
-    $('.content').html(sectionTemplate);
-
     var template = $('#todo-template').html();
+
+    // render section to .content div
+    $('.content').html(sectionTemplate);
 
     // fetch or create todoItems from localStorage
     var items = localStorage.todoItems;
@@ -48,30 +50,33 @@ View.prototype.render = function() {
                 $item.removeClass(container.group.options.draggedClass).removeAttr("style");
                 $("body").removeClass(container.group.options.bodyClass);
                 
-                saveTodo();
-            }
+                this.saveTodo();
+            }.bind(this)
         });
     }
 };
 
+/**
+ * Register event handlers
+ */
 View.prototype.bindEvents = function() {
     // create new todo item element when link is clicked
     $('#create-todo')
         .unbind('click')
-        .on('click', createTodo);
+        .on('click', this.createTodo.bind(this));
 
     // remove completed todo items when link is clicked
     $('#clear-todo')
         .unbind('click')
-        .on('click', clearTodo);
+        .on('click', this.clearTodo.bind(this));
 
     // save todo data when a todo item is changed
-    this.bindTodoSave('.todo .input-group input', saveTodo);
+    this.bindTodoSave('.todo .input-group input', this.saveTodo);
 
     // toggle 'complete' class on li of todo item that was checked/unchecked
     $('.todo-list input[type=checkbox]')
         .unbind('change')
-        .on('change', handleTodoCheckClick);
+        .on('change', this.handleTodoCheckClick);
 }
 
 /**
@@ -81,13 +86,14 @@ View.prototype.bindEvents = function() {
 View.prototype.createTodo = function(e) {
     e.preventDefault();
         
-    var $item =$($('#todo-template').html());
+    var $item = $($('#todo-template').html());
 
     $('.todo-list').append($item);
     $item.find('input[type=text]').focus();
 
     this.bindTodoSave('.todo .input-group input', this.saveTodo);
-    $('.todo-list input[type=checkbox]').on('change', handleTodoCheckClick);
+
+    $('.todo-list input[type=checkbox]').on('change', this.handleTodoCheckClick);
 };
 
 /**
@@ -97,7 +103,7 @@ View.prototype.createTodo = function(e) {
 View.prototype.clearTodo = function(e) {
     e.preventDefault();
 
-    var $items = $(this).parents('.todo').find('.input-group');
+    var $items = $(e.target).parents('.todo').find('.input-group');
 
     $items.each(function() {
         if ($(this).find('input').prop('checked')) {
@@ -105,7 +111,7 @@ View.prototype.clearTodo = function(e) {
         }
     });
 
-    saveTodo();
+    this.saveTodo();
 };
 
 /**
@@ -160,4 +166,4 @@ View.prototype.saveTodo = function() {
     localStorage.todoItems = JSON.stringify(items);
 };
 
-modules.exports = View;
+module.exports = View;

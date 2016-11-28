@@ -30,8 +30,8 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9"> 
                     <ul class="nav navbar-nav"> 
-                        <li class="active" data-template-id="todo-section-template"><a href="#">Todo</a></li>
-                        <li data-template-id="checklists-section-template"><a href="#">Checklists</a></li>
+                        <li class="active" id="nav-todo"><a href="#">Todo</a></li>
+                        <li id="nav-checklists"><a href="#">Checklists</a></li>
                         <li><a href="#">Timers</a></li>
                         <li><a href="#">Library</a></li>
                         <li><a href="#">Wiki</a></li>
@@ -45,24 +45,6 @@
         </div>
 
     </div><!-- /.container -->
-
-    <!-- Contains data for the checklists -->
-    <script id="checklist-json" type="application/json">
-        {
-            "Interplanetary Travel": [{
-                "title": "Gather supplies",
-                "description": "Stock up on fuel, ammo, food, and oxygen."
-            }, {
-                "title": "Stock ship",
-                "description": "Fill ship O2, fuel, and food supplies."
-            }],
-
-            "Mining Run Prep": [{
-                "title": "Gather supplies",
-                "description": "Stock up on fuel, ammo, food, and oxygen."
-            }]
-        }
-    </script>
 
     <!-- Todo section template -->
     <script id="todo-section-template" type="text/template">
@@ -113,6 +95,6 @@
     </script>
 
     <script src="resources/js/vendor.min.js"></script>
-    <script src="resources/js/app.js"></script>
+    <script src="resources/js/app.min.js"></script>
   </body>
 </html>

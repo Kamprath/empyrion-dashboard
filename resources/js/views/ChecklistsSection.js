@@ -1,4 +1,7 @@
-var renderTemplate = require('../renderTemplate');
+'use strict';
+
+var renderTemplate = require('../renderTemplate'),
+    data = require('../../data/checklists.json');
 
 function View() {
     this.render();
@@ -9,12 +12,12 @@ View.prototype.bindEvents = function() {
     // reset checkboxes and list styles when 'reset' is clicked
     $('.reset')
         .unbind('click')
-        .on('click', resetList);
+        .on('click', this.resetList);
 
     // apply 'complete' style when a list box is clicked
     $('.list-group-item')
         .unbind('click')
-        .on('click', completeItem);
+        .on('click', this.completeItem);
 
     // don't check checkboxes when clicked because link will handle it
     $('.list-group-item input[type=checkbox]')
@@ -42,13 +45,12 @@ View.prototype.completeItem = function(e) {
 /**
  * Render checklists from data
  */
-View.prototype.renderChecklists = function() {
-    var checklistSectionTemplate = $('#checklists-section-template').html();
-    $('.content').html(checklistSectionTemplate);
+View.prototype.render = function() {
+    var checklistTemplate = $('#checklist-template').html(),
+        checklistItemTemplate = $('#checklist-item-template').html(),
+        checklistSectionTemplate = $('#checklists-section-template').html();
 
-    var data = JSON.parse($('#checklist-json').html());
-    var checklistTemplate = $('#checklist-template').html();
-    var checklistItemTemplate = $('#checklist-item-template').html();
+    $('.content').html(checklistSectionTemplate);
 
     for (var title in data) {
         // create a new element to contain checklist
