@@ -77,12 +77,15 @@
                 continue;
             }
 
-            // get template markup
             var $template = $(template);
 
             // set element text to todo text
             $template.find('input[type=text]').val(items[i].text);
-            $template.find('input[type=checkbox]').prop('checked', items[i].checked);
+
+            if (items[i].checked) {
+                $template.find('input[type=checkbox]').prop('checked', true);
+                $template.addClass('complete');
+            }
 
             $('.todo-list').append($template);
 
@@ -125,6 +128,7 @@
         $item.find('input[type=text]').focus();
 
         bindTodoSave('.todo .input-group input', saveTodo);
+        $('.todo-list input[type=checkbox]').on('change', handleTodoCheckClick);
     }
 
     function clearTodo(e) {
@@ -187,6 +191,9 @@
         $('.nav a')
             .unbind('click')
             .on('click', handleNavClick);
+
+        // toggle 'complete' class on li of todo item that was checked/unchecked
+        $('.todo-list input[type=checkbox]').unbind('change').on('change', handleTodoCheckClick);
     }
 
     /**
@@ -267,6 +274,24 @@
         $(e.target).parents('li').addClass('active');
 
         render();
+    }
+
+    /**
+     * Handle click event of a todo item check/uncheck
+     * @param {Event} e     Event object
+     */
+    function handleTodoCheckClick(e) {
+        console.log($(e.target).parents('li'));
+        var $li = $(e.target).parents('li');
+
+        // if input is checked, add 'complete' class to li
+        if ($(e.target).prop('checked')) {
+            $li.addClass('complete');
+            return;
+        }
+
+        // otherwise remove 'complete' from the li
+        $li.removeClass('complete');    
     }
 
     /**
