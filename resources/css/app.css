@@ -25,3 +25,30 @@ body.dragging, .input-group-addon, body.dragging * {
 .todo-list .input-group {
     margin: 3px 0;
 }
+
+.todo-list .input-group-addon {
+    border: none;
+    background-color: #555;
+}
+
+.todo-list .input-group input[type=text] {
+    border: none;
+    background-color: black;
+    color: white;
+    opacity: .8;
+    font-size: 16px;
+}
+
+.checklists .list-group-item, .checklists .list-group-item:hover, .checklists .list-group-item:focus {
+    background-color: #222;
+    border: none;
+    margin-top: 3px;
+    color: white;
+    opacity: .9;
+}
+.checklists .list-group-item.disabled {
+    opacity: .6;
+}
+.checklists h4 {
+    color: #fff !important
+}
