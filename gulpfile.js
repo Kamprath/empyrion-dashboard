@@ -35,7 +35,7 @@ gulp.task('build', function() {
 
         // write sourcemaps
         .pipe(
-            sourcemaps.write('./resources/js')
+            sourcemaps.write('./')
         )
 
         // write output to file
