@@ -16,23 +16,34 @@
   <body>
     <div class="container">
 
-      <div class="starter-template">
-        <h2>Todo</h2>
-        <div class="todo">
-            <ul class="todo-list">
-                <!-- Todo items rendered here -->
-            </ul>
+        <nav class="navbar navbar-inverse"> 
+            <div class="container-fluid"> 
+                <div class="navbar-header"> 
+                    <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false"> 
+                        <span class="sr-only">Toggle navigation</span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                    </button> 
+                    
+                    <a href="#" class="navbar-brand"><strong>Empyrion</strong></a> 
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9"> 
+                    <ul class="nav navbar-nav"> 
+                        <li class="active" data-template-id="todo-section-template"><a href="#">Todo</a></li>
+                        <li data-template-id="checklists-section-template"><a href="#">Checklists</a></li>
+                        <li><a href="#">Timers</a></li>
+                        <li><a href="#">Library</a></li>
+                        <li><a href="#">Wiki</a></li>
+                    </ul> 
+                </div>
+            </div>
+        </nav>
 
-            <button id="create-todo" type="button" class="btn btn-default btn-sm">New</button>
-            <button id="clear-todo" type="button" class="btn btn-default btn-sm">Clear Completed</button>
+        <div class="content">
+            <!-- Active section's template is rendered here -->
         </div>
 
-        <div class="checklists">
-            <h2>Checklists</h2>
-            <!-- Checklists rendered here -->
-        </div>
-
-        </div>
     </div><!-- /.container -->
 
     <!-- Contains data for the checklists -->
@@ -53,6 +64,20 @@
         }
     </script>
 
+    <!-- Todo section template -->
+    <script id="todo-section-template" type="text/template">
+        <h1>Todo</h1>
+        <div class="todo">
+            <ul class="todo-list">
+                <!-- Todo items rendered here -->
+            </ul>
+
+            <button id="create-todo" type="button" class="btn btn-default btn-md">New</button>
+            <button id="clear-todo" type="button" class="btn btn-default btn-md">Clear Completed</button>
+        </div>
+    </script>
+
+    <!-- Todo item template -->
     <script id="todo-template" type="text/template">
         <li class="input-group">
             <span class="input-group-addon">
@@ -62,12 +87,22 @@
         </li>
     </script>
 
+    <!-- Checklists section template -->
+    <script id="checklists-section-template" type="text/template">
+        <h1>Checklists</h1>
+        <div class="checklists">
+            <!-- Checklists rendered here -->
+        </div>
+    </script>
+
+    <!-- Checklist group template -->
     <script id="checklist-template" type="text/template">
         <div class="list-group">
             <h3>{title} <button type="button" class="btn btn-default btn-xs reset">Reset</button></h3>
         </div>
     </script>
 
+    <!-- Checklist item template -->
     <script id="checklist-item-template" type="text/template">
         <a href="#" class="list-group-item">
             <h4 class="list-group-item-heading">

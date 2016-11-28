@@ -30,7 +30,6 @@
      * Save todo items to localStorage
      */
     function saveTodo() {
-        console.log('saveTodo');
         var items = [];
 
         // iterate through todo items
@@ -57,6 +56,10 @@
      * Retrieve todo data from storage and populate list
      */
     function renderTodo() {
+        // render section to .content div
+        var sectionTemplate = $('#todo-section-template').html();
+        $('.content').html(sectionTemplate);
+
         var template = $('#todo-template').html();
 
         // fetch or create todoItems from localStorage
@@ -139,38 +142,61 @@
     }
 
     function bindTodoSave(selector, fn) {
-        console.log('fucking retarded');
         $(selector)
             .unbind('change keyup')
             .on('change keyup', fn)
     }
 
+    /**
+     * Register event handlers.
+     * 
+     * Note: This method is called after each render, so remember to unbind before re-binding events.
+     */
     function bindEvents() {
         // reset checkboxes and list styles when 'reset' is clicked
-        $('.reset').on('click', resetList);
+        $('.reset')
+            .unbind('click')
+            .on('click', resetList);
 
         // apply 'complete' style when a list box is clicked
-        $('.list-group-item').on('click', completeItem);
+        $('.list-group-item')
+            .unbind('click')
+            .on('click', completeItem);
 
         // don't check checkboxes when clicked because link will handle it
-        $('.list-group-item input[type=checkbox]').on('click', function(e) {
-            e.preventDefault();
-        });
+        $('.list-group-item input[type=checkbox]')
+            .unbind('click')
+            .on('click', function(e) {
+                e.preventDefault();
+            });
 
         // create new todo item element when link is clicked
-        $('#create-todo').on('click', createTodo);
+        $('#create-todo')
+            .unbind('click')
+            .on('click', createTodo);
 
         // remove completed todo items when link is clicked
-        $('#clear-todo').on('click', clearTodo);
+        $('#clear-todo')
+            .unbind('click')
+            .on('click', clearTodo);
 
         // save todo data when a todo item is changed
         bindTodoSave('.todo .input-group input', saveTodo);
+
+        // set clicked nav item to active
+        $('.nav a')
+            .unbind('click')
+            .on('click', handleNavClick);
     }
 
     /**
      * Render checklists from data
      */
-    function renderChecklists(data) {
+    function renderChecklists() {
+        var checklistSectionTemplate = $('#checklists-section-template').html();
+        $('.content').html(checklistSectionTemplate);
+
+        var data = JSON.parse($('#checklist-json').html());
         var checklistTemplate = $('#checklist-template').html();
         var checklistItemTemplate = $('#checklist-item-template').html();
 
@@ -199,16 +225,60 @@
         }
     }
 
-    $(document).ready(function() {
-        // render todo items from localStorage
-        renderTodo();
+    /**
+     * Render the template that corresponds to the active nav item
+     */
+    function render() {
+        $('.content').html(null);
 
-        // render checklists from JSON data
-        renderChecklists(
-            JSON.parse($('#checklist-json').html())
-        );
+        var $item = $('.nav .active');
 
-        // bind events
+        if (!$item) {
+            return false;
+        }
+
+        //get item's data-template-id attribute
+        var templateID = $item.attr('data-template-id');
+
+        var $template = $('#' + templateID) ? $('#' + templateID).html() : null;
+
+        // return if template doesn't exist or is not mapped to a function
+        if (!$template || !templates.hasOwnProperty(templateID) || typeof templates[templateID] !== 'function') {
+            return false;
+        }
+
+        // call rendering function that is mapped to the template ID
+        templates[templateID]();
+
+        // re-bind events after render
         bindEvents();
+
+        return true;
+    }
+
+    /**
+     * Handle click event of a navbar button
+     * @param {Event} e     Event object
+     */
+    function handleNavClick(e) {
+        e.preventDefault();
+
+        $('.nav .active').removeClass('active');
+        $(e.target).parents('li').addClass('active');
+
+        render();
+    }
+
+    /**
+     * A mapping of template IDs to the functions that render each
+     */
+    var templates = {
+        'todo-section-template': renderTodo,
+        'checklists-section-template': renderChecklists
+    };
+
+    $(document).ready(function() {
+        // render section that corresponds with selected nav item
+        render();
     });
 })();
