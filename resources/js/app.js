@@ -193,7 +193,7 @@
             .on('click', handleNavClick);
 
         // toggle 'complete' class on li of todo item that was checked/unchecked
-        $('.todo-list input[type=checkbox]').unbind('change').on('change', handleTodoCheckClick);
+        $('.todo-list input[type=checkbox]').on('change', handleTodoCheckClick);
     }
 
     /**
