@@ -23,7 +23,8 @@
                 <!-- Todo items rendered here -->
             </ul>
 
-            <a href="#" id="create-todo">Add...</a> | <a href="#" id="clear-todo">Clear Completed</a>
+            <button id="create-todo" type="button" class="btn btn-default btn-sm">New</button>
+            <button id="clear-todo" type="button" class="btn btn-default btn-sm">Clear Completed</button>
         </div>
 
         <div class="checklists">
@@ -63,7 +64,7 @@
 
     <script id="checklist-template" type="text/template">
         <div class="list-group">
-            <h3>{title} <small><a href="#" class="reset">Reset</a></small></h3>
+            <h3>{title} <button type="button" class="btn btn-default btn-xs reset">Reset</button></h3>
         </div>
     </script>
 
