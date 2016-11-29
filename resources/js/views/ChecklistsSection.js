@@ -33,6 +33,7 @@ View.prototype.bindEvents = function() {
 View.prototype.completeItem = function(e) {
     if (e) {
         e.stopPropagation();
+        e.preventDefault();
     }
     
     var $input = $(this).find('input');
