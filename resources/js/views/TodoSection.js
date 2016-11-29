@@ -71,12 +71,13 @@ View.prototype.bindEvents = function() {
         .on('click', this.clearTodo.bind(this));
 
     // save todo data when a todo item is changed
-    this.bindTodoSave('.todo .input-group input', this.saveTodo);
+    this.bindTodoSave('.todo .input-group input[type=text]', this.saveTodo);
 
     // toggle 'complete' class on li of todo item that was checked/unchecked
     $('.todo-list input[type=checkbox]')
         .unbind('change')
-        .on('change', this.handleTodoCheckClick);
+        .on('change', this.handleTodoCheckClick)
+        .on('change', this.saveTodo);
 }
 
 /**
@@ -128,7 +129,7 @@ View.prototype.handleTodoCheckClick = function(e) {
     }
 
     // otherwise remove 'complete' from the li
-    $li.removeClass('complete');    
+    $li.removeClass('complete');
 };
 
 /**
