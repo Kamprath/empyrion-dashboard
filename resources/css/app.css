@@ -1,7 +1,7 @@
 body {
     background-color: black;
     color: #fff;
-    background-image: url('../images/bg.jpg');
+    /*background-image: url('../images/bg.jpg');*/
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -30,6 +30,7 @@ body.dragging, .input-group-addon, body.dragging * {
 }
 .todo-list .input-group {
     margin: 3px 0;
+    border: 1px solid #333;
 }
 
 .todo-list .input-group-addon {
