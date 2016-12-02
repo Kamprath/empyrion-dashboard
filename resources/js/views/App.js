@@ -16,8 +16,18 @@ var navViews = {
  */
 function App() {
     this.render();
-    this.bindEvents();
+    this.bindEvents(); 
+    this.applyBlack();
 }
+
+/**
+ * Apply '.black' class to body if '?black' URL param exists
+ */
+App.prototype.applyBlack = function() {
+    if (window.location.href.indexOf("black") >= 0) {
+        $('body').addClass('black');
+    }
+};
 
 /**
  * Register event handlers
