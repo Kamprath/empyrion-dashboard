@@ -32,10 +32,9 @@ App.prototype.applyBlack = function() {
 /**
  * Register event handlers
  */
-App.prototype.bindEvents = function() {
+App.prototype.bindEvents = function() {    
     // set clicked nav item to active
-    $('.nav a')
-        .unbind('click')
+    $('.nav li[id] a')
         .on('click', this.handleNavClick.bind(this));
 };
 
