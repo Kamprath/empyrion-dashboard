@@ -1,23 +1,52 @@
-'use strict';
-
 var TodoSectionView = require('./TodoSection'),
-    ChecklistsSectionView = require('./ChecklistsSection');
+    ChecklistsSectionView = require('./ChecklistsSection'),
+    LibraryView = require('./Library');
 
 /**
  * A mapping of nav item IDs to the views that correspond with their sections
  */
 var navViews = {
     'nav-todo': TodoSectionView,
-    'nav-checklists': ChecklistsSectionView
+    'nav-checklists': ChecklistsSectionView,
+    'nav-library': LibraryView
 };
 
 /**
  * App constructor
  */
 function App() {
+    activateLastViewed();
     this.render();
     this.bindEvents(); 
     this.applyBlack();
+}
+
+/**
+ * Set .active on navigation link that was last visited
+ * 
+ * The last-visited navigation link is stored in localStorage.
+ */
+function activateLastViewed() {
+    var lastViewedID = getLastViewed();
+    var $lastViewedNav = $('#' + lastViewedID);
+
+    if (!lastViewedID || !$lastViewedNav.length) {
+        return;
+    }
+
+    $('.active').removeClass('active');
+    $lastViewedNav.addClass('active');
+}
+
+/**
+ * Store ID of active nav item in localStorage
+ */
+function setLastViewed(id) {
+    localStorage.section = id;
+}
+
+function getLastViewed() {
+    return localStorage.section;
 }
 
 /**
@@ -45,11 +74,11 @@ App.prototype.render = function() {
     $('.content').html(null);
 
     var $item = $('.nav .active');
-
     if (!$item) {
         return false;
     }
 
+    // get ID of selected nav item and get the view associated with it
     var id = $item.attr('id');
     var view = navViews[id];
 
@@ -74,6 +103,10 @@ App.prototype.handleNavClick = function(e) {
 
     $('.nav .active').removeClass('active');
     $(e.target).parents('li').addClass('active');
+
+    setLastViewed(
+        $('.nav .active').attr('id')
+    );
 
     this.render();
 };
