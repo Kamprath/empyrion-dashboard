@@ -1,2 +1,2 @@
 # empyrion-dashboard
-A simple web app for organizing tasks and data while playing Empyrion.
+A simple web app for organizing Empyrion tasks and information.
