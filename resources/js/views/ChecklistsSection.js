@@ -1,5 +1,3 @@
-'use strict';
-
 var renderTemplate = require('../renderTemplate'),
     data = require('../../data/checklists.json');
 
@@ -41,7 +39,7 @@ View.prototype.completeItem = function(e) {
 
     $(this).toggleClass('disabled');
     $input.prop('checked', !isChecked);
-}
+};
 
 /**
  * Render checklists from data
@@ -76,7 +74,7 @@ View.prototype.render = function() {
         // append checklist element to .checklists element
         $('.checklists').append($checklist);
     }
-}
+};
 
 /**
  * Reset checklist items to unchecked
@@ -92,6 +90,6 @@ View.prototype.resetList = function(e) {
         $(this).removeClass('disabled');
         $(this).find('input').prop('checked', false);
     });
-}
+};
 
 module.exports = View;

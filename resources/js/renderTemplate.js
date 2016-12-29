@@ -15,4 +15,4 @@ module.exports = function(html, data) {
     
     // return html
     return html;
-}
+};

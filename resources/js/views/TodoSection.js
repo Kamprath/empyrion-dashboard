@@ -1,17 +1,22 @@
-'use strict';
-
 /**
  * Construct the view
  */
 function View() {
-    this.render();
+    render();
     this.bindEvents();
+}
+
+function onSortableDrop ($item, container, _super, event) {
+    $item.removeClass(container.group.options.draggedClass).removeAttr("style");
+    $("body").removeClass(container.group.options.bodyClass);
+    
+    this.saveTodo();
 }
 
 /**
  * Render the view
  */
-View.prototype.render = function() {
+function render() {
     var sectionTemplate = $('#todo-section-template').html();
     var template = $('#todo-template').html();
 
@@ -46,15 +51,10 @@ View.prototype.render = function() {
         $('.todo-list').append($template);
 
         $('.todo-list').sortable({
-            onDrop: function ($item, container, _super, event) {
-                $item.removeClass(container.group.options.draggedClass).removeAttr("style");
-                $("body").removeClass(container.group.options.bodyClass);
-                
-                this.saveTodo();
-            }.bind(this)
+            onDrop: onSortableDrop.bind(this)
         });
     }
-};
+}
 
 /**
  * Register event handlers
@@ -78,7 +78,7 @@ View.prototype.bindEvents = function() {
         .unbind('change')
         .on('change', this.handleTodoCheckClick)
         .on('change', this.saveTodo);
-}
+};
 
 /**
  * Append a new todo item element to the list
@@ -139,7 +139,7 @@ View.prototype.bindTodoSave = function(selector, fn) {
     $(selector)
         .unbind('change keyup')
         .on('change keyup', fn);
-}
+};
 
 /**
  * Save todo item data to localStorage
