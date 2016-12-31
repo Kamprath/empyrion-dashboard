@@ -260,6 +260,8 @@ function deleteDocument(id) {
         
     // if activeID is set to id, nullify activeID
     this.data.activeID = (this.data.activeID === id) ? null : this.data.activeID;
+
+    saveData.bind(this)();
 }
 
 /**
