@@ -9,6 +9,8 @@
 module.exports = function(html, data) {
     // iterate through keys in data
     for (var key in data) {
+        data[key] = (data[key] === null) ? '' : data[key];
+
         // replace occurences of the key with its value
         html = html.replace('{' + key + '}', data[key]);
     }

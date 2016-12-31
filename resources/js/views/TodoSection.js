@@ -2,7 +2,7 @@
  * Construct the view
  */
 function View() {
-    render();
+    render.bind(this)();
     this.bindEvents();
 }
 

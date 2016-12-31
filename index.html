@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span> 
                     </button> 
                     
-                    <a href="#black" class="navbar-brand"><strong>Empyrion</strong></a> 
+                    <a href="?black" class="navbar-brand"><strong>Empyrion</strong></a> 
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9"> 
                     <ul class="nav navbar-nav"> 
@@ -95,7 +95,45 @@
 
     <!-- Library section template -->
     <script id="library-section-template" type="text/template">
-        <h1>Library</h1>
+        <div class="row library">
+            <div class="library-sidebar list-group col-md-3">
+                <a href="#" class="list-group-item library-item create-item">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    Create new document...
+                </a>
+            </div>
+            <div class="library-content col-md-9">
+                <h1 class="library-document-title">Library</h1>
+                <p>Select a document to view.</p>
+            </div>
+        </div>
+    </script>
+
+    <!-- Library document template -->
+    <script id="library-document-template" type="text/template">
+        <div class="row">
+            <h1 class="library-document-title col-md-10">{title}</h1>
+            <div class="library-document-controls col-md-2">
+                <button type="button" class="btn btn-sm btn-default library-document-delete">Delete</button>
+                <button type="button" class="btn btn-sm btn-default library-document-edit">Edit</button>
+            </div>
+        </div>
+        <div class="library-document-content">{content}</div>
+    </script>
+
+    <!-- Library document edit form template -->
+    <script id="library-document-edit-template" type="text/template">
+        <input type="text" class="library-document-edit-title" value="{title}" required>
+        <textarea class="library-document-edit-text" required>{text}</textarea>
+        <div class="library-document-edit-controls">
+            <button type="button" class="btn btn-default library-document-cancel">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </script>
+
+    <!-- Library sidebar item template -->
+    <script id="library-sidebar-item-template" type="text/template">
+         <a href="#" class="list-group-item library-item" data-document-id="{id}">{title}</a>
     </script>
 
     <script src="resources/js/vendor.min.js"></script>

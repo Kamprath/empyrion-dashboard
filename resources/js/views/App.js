@@ -18,7 +18,7 @@ function App() {
     activateLastViewed();
     this.render();
     this.bindEvents(); 
-    this.applyBlack();
+    applyBlack();
 }
 
 /**
@@ -52,11 +52,12 @@ function getLastViewed() {
 /**
  * Apply '.black' class to body if '?black' URL param exists
  */
-App.prototype.applyBlack = function() {
+function applyBlack() {
     if (window.location.href.indexOf("black") >= 0) {
         $('body').addClass('black');
+        $('.navbar-brand').attr('href', 'index.html');
     }
-};
+}
 
 /**
  * Register event handlers
