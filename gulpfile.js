@@ -13,9 +13,8 @@ var browserify = require('browserify'),
  */
 gulp.task('lint', function() {
     return gulp.src([
-        '!./resources/js/*.min.js',
-        './resources/js/*.js', 
-        './resources/js/**/*.js'
+        './src/js/*.js', 
+        './src/js/**/*.js'
     ])
         .pipe(jshint({
             strict: false
@@ -30,7 +29,7 @@ gulp.task('lint', function() {
 gulp.task('build', ['lint'], function() {
     // set up browserify instance on a task basis
     var b = browserify({
-        entries: './resources/js/app.js',
+        entries: './src/js/app.js',
         debug: true
     });
 
@@ -56,7 +55,7 @@ gulp.task('build', ['lint'], function() {
 
         // write output to file
         .pipe(
-            gulp.dest('./resources/js/')
+            gulp.dest('./public/resources/js/')
         );
 });
 
