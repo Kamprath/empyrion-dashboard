@@ -1,0 +1,26 @@
+{
+    "CV Travel Prep": [{
+        "title": "CV maintenance checklist",
+        "description": "Go through the CV Maintenance checklist"
+    }, {
+        "title": "Stock up on personal supplies",
+        "description": "Make sure you are stocked up on ammo, bandages, food, drill & MT charges supplies."
+    }],
+
+    "CV Maintenance": [{
+        "title": "Check fuel",
+        "description": "Check fuel levels and refill if needed."
+    }, {
+        "title": "Check oxygen",
+        "description": "Check oxygen levels and refill if needed."
+    }, {
+        "title": "Check warp drive tank",
+        "description": "Verify that warp drive tank has enough pentaxit."
+    }, {
+        "title": "Check food supply",
+        "description": "Verify that the fridge contains enough food for the duration of the trip."
+    }, {
+        "title": "Check constructor supplies",
+        "description": "Restock constructor with ingots and materials, if necessary and possible"
+    }]
+}
