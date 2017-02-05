@@ -6,7 +6,9 @@ var browserify = require('browserify'),
     sourcemaps = require('gulp-sourcemaps'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
-    stylish = require('jshint-stylish');
+    stylish = require('jshint-stylish'),
+    less = require('gulp-less');
+    cleanCss = require('gulp-clean-css');
 
 /**
  * Lint unminified JS files using jshint
@@ -24,9 +26,31 @@ gulp.task('lint', function() {
 });
 
 /**
+ * Compile Less, produce source maps, and minify CSS
+ */
+gulp.task('build-css', function() {
+    return gulp.src('./src/less/**/*.less')
+        .pipe(
+            less()
+        )
+        .pipe(
+            sourcemaps.init()
+        )
+        .pipe(
+            cleanCss()
+        )
+        .pipe(
+            sourcemaps.write('./')
+        )
+        .pipe(
+            gulp.dest('./public/resources/css/')
+        );
+});
+
+/**
  * Browserify, uglify, and produce source maps
  */
-gulp.task('build', ['lint'], function() {
+gulp.task('build-js', ['lint'], function() {
     // set up browserify instance on a task basis
     var b = browserify({
         entries: './src/js/app.js',
@@ -59,4 +83,9 @@ gulp.task('build', ['lint'], function() {
         );
 });
 
+// Define build and default tasks
+gulp.task('build', [
+    'build-js',
+    'build-css'
+]);
 gulp.task('default', ['build']);
